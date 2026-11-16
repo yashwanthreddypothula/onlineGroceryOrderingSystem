@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "7d9b9a62-4f3b-4c28-97bc-b7f9435a6001",
+		"name": "Online Grocery Ordering System",
+		"description": "Comprehensive Postman collection for testing the Online Grocery Ordering System REST API built with Spring Boot 3.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "1. Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"David Miller\",\n  \"email\": \"david.miller@example.com\",\n  \"address\": \"321 Maple Lane, Star City\",\n  \"phone\": \"+1-555-0199\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers"]
+						}
+					}
+				},
+				{
+					"name": "2. Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers"]
+						}
+					}
+				},
+				{
+					"name": "3. Get Customer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers", "1"]
+						}
+					}
+				},
+				{
+					"name": "4. Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Alice Smith Updated\",\n  \"email\": \"alice.updated@example.com\",\n  \"address\": \"999 Updated Blvd, Central City\",\n  \"phone\": \"+1-555-9999\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers", "1"]
+						}
+					}
+				},
+				{
+					"name": "5. Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/3",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers", "3"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Grocery Items",
+			"item": [
+				{
+					"name": "1. Create Grocery Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Greek Yogurt 500g\",\n  \"category\": \"Dairy\",\n  \"price\": 4.29,\n  \"quantity\": 25\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items"]
+						}
+					}
+				},
+				{
+					"name": "2. Get All Grocery Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items"]
+						}
+					}
+				},
+				{
+					"name": "3. Filter Grocery Items by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items?category=Dairy",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items"],
+							"query": [
+								{
+									"key": "category",
+									"value": "Dairy"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "4. Get Grocery Item by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items", "1"]
+						}
+					}
+				},
+				{
+					"name": "5. Update Grocery Item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Whole Milk 1L (Organic)\",\n  \"category\": \"Dairy\",\n  \"price\": 3.99,\n  \"quantity\": 75\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items", "1"]
+						}
+					}
+				},
+				{
+					"name": "6. Delete Grocery Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/grocery-items/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "grocery-items", "5"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "1. Create Order (Auto-calculate Total Price)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": 1,\n  \"groceryItemIds\": [1, 2, 4]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders"]
+						}
+					}
+				},
+				{
+					"name": "2. Create Order (Explicit Total Price & Date)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": 2,\n  \"groceryItemIds\": [2, 3],\n  \"orderDate\": \"2026-11-16T15:30:00\",\n  \"totalPrice\": 7.50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders"]
+						}
+					}
+				},
+				{
+					"name": "3. Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders"]
+						}
+					}
+				},
+				{
+					"name": "4. Get Order by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "1"]
+						}
+					}
+				},
+				{
+					"name": "5. Get Orders by Customer ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/customer/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "customer", "1"]
+						}
+					}
+				},
+				{
+					"name": "6. Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": 1,\n  \"groceryItemIds\": [1, 3]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "1"]
+						}
+					}
+				},
+				{
+					"name": "7. Delete Order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/2",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "2"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Error Scenarios",
+			"item": [
+				{
+					"name": "404 Not Found - Customer Does Not Exist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers", "999"]
+						}
+					}
+				},
+				{
+					"name": "400 Bad Request - Validation Error (Empty Name)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"\",\n  \"email\": \"invalid-format\",\n  \"address\": \"\",\n  \"phone\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers"]
+						}
+					}
+				},
+				{
+					"name": "409 Conflict - Duplicate Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Duplicate Alice\",\n  \"email\": \"alice.smith@example.com\",\n  \"address\": \"Some Address\",\n  \"phone\": \"1234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "customers"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
